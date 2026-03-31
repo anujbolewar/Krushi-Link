@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrushiLink | Connecting Bharat to the World</title>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Sophisticated Font Pairing -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Earthy, Premium Palette */
+            --bg-color: #F8F9F6;
+            --surface-color: #FFFFFF;
+            --brand-dark: #1E3329;
+            --brand-primary: #2C4C3B;
+            --brand-soft: #E9EFE8;
+            --accent-gold: #D2A454;
+            --india-saffron: #FF9933;
+            --india-green: #138808;
+            
+            --text-main: #1A1D1A;
+            --text-muted: #5C6259;
+            --text-light: #9B9E99;
+            
+            --border-soft: rgba(44, 76, 59, 0.1);
+            --shadow-float: 0 20px 40px -10px rgba(0,0,0,0.08);
+            --shadow-card: 0 4px 12px rgba(0,0,0,0.03);
+            
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-round: 999px;
+            
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            color: var(--brand-dark);
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Typography Utilities */
+        .eyebrow {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            /* Subtle Indian gradient for special eyebrows */
+            background: linear-gradient(90deg, var(--india-saffron), var(--brand-primary), var(--india-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .eyebrow i {
+            -webkit-text-fill-color: var(--accent-gold);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.75rem;
+            border-radius: var(--radius-round);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-dark);
+            color: var(--surface-color);
+            box-shadow: 0 4px 15px rgba(30, 51, 41, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 51, 41, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--brand-dark);
+            border-color: var(--border-soft);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--brand-dark);
+            background-color: var(--brand-soft);
+        }
+
+        /* Floating Nav */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-round);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: var(--shadow-card);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i { color: var(--accent-gold); }
+
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--brand-dark); }
+
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+
+        /* Hero Section */
+        .hero {
+            padding: 12rem 5% 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-content h1 i { font-style: italic; color: var(--brand-primary); }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+        }
+
+        .hero-visual { position: relative; }
+        
+        .hero-image-main {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-float);
+        }
+
+        .hero-floating-card {
+            position: absolute;
+            bottom: 40px;
+            left: -40px;
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-float);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            animation: float 6s ease-in-out infinite;
+            border: 1px solid var(--border-soft);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-icon {
+            background: var(--brand-soft);
+            color: var(--brand-primary);
+            padding: 0.75rem;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
+        .floating-text h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .floating-text p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+        
+        .badge-mh {
+            display: inline-block;
+            background: #F0F4FF;
+            color: #0044CC;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-right: 0.3rem;
+            font-weight: 600;
+        }
+        
+        .badge-eu {
+            display: inline-block;
+            background: #FFF4F0;
+            color: #CC2200;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Partner Bar */
+        .partners {
+            padding: 3rem 5%;
+            background: var(--surface-color);
+            border-block: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .partners p { font-size: 0.85rem; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; }
+        
+        .partners-logos { 
+            display: flex; 
+            gap: 3.5rem; 
+            opacity: 0.6; 
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .partner-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--brand-dark);
+        }
+        
+        .partner-item i { font-size: 2.2rem; margin-bottom: 0.2rem; }
+        .partner-item span { font-size: 0.8rem; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* INDIA CONNECT SECTION (NEW) */
+        .india-connect {
+            background: var(--brand-soft);
+            padding: 8rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .india-connect-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.04;
+            font-size: clamp(8rem, 25vw, 400px);
+            color: var(--brand-dark);
+            z-index: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .ic-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .map-container {
+            position: relative;
+            padding: 4rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .node { text-align: center; width: 140px; }
+        
+        .node-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--brand-dark);
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-float);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .connection-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-primary), var(--accent-gold));
+            position: relative;
+            opacity: 0.6;
+            margin: 0 -20px;
+            top: -20px; 
+            border-radius: 2px;
+        }
+        
+        .connection-line::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            top: -6px;
+            left: 0;
+            box-shadow: 0 0 15px var(--accent-gold);
+            animation: travel 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes travel {
+            0% { left: 0%; opacity: 0; transform: scale(0.5); }
+            10% { opacity: 1; transform: scale(1); }
+            90% { opacity: 1; transform: scale(1); }
+            100% { left: 100%; opacity: 0; transform: scale(0.5); }
+        }
+
+        .stat-grid {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item h3 { font-size: 3rem; color: var(--brand-dark); margin-bottom: 0.5rem; }
+        .stat-item p { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--brand-primary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; }
+
+        /* Bento Box Features */
+        .bento-section { padding: 8rem 5%; max-width: 1200px; margin: 0 auto; }
+        
+        .section-header { text-align: center; margin-bottom: 4rem; max-width: 600px; margin-inline: auto; }
+        .section-header h2 { font-size: 2.5rem; margin-top: 1rem; }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bento-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-float); }
+
+        .bento-card i.ph, .bento-card i.ph-duotone { font-size: 2rem; color: var(--accent-gold); margin-bottom: 1.5rem; }
+        .bento-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .bento-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
+        /* Span configurations */
+        .bento-large { grid-column: span 2; background: var(--brand-dark); color: var(--surface-color); }
+        .bento-large h3, .bento-large p { color: var(--surface-color); }
+        .bento-large h3 { font-family: 'Playfair Display', serif; font-size: 2rem; }
+        .bento-large p { opacity: 0.8; font-size: 1.1rem; max-width: 400px; }
+        
+        .bento-graphic {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            width: 250px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* Narrative Process */
+        .story-section {
+            background: var(--surface-color);
+            padding: 8rem 5%;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        .story-container { max-width: 1200px; margin: 0 auto; display: flex; gap: 6rem; align-items: center; }
+        
+        .story-visual {
+            flex: 1;
+            position: relative;
+        }
+        
+        .story-visual img { border-radius: var(--radius-lg); box-shadow: var(--shadow-float); }
+        
+        .story-content { flex: 1; }
+        
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 50px;
+            bottom: -20px;
+            width: 1px;
+            background-color: var(--border-soft);
+            z-index: 0;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-soft);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--brand-primary);
+            z-index: 1;
+            box-shadow: var(--shadow-card);
+        }
+
+        .step-text h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 700; margin-top: 0.5rem; margin-bottom: 0.25rem; }
+        .step-text p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Editorial Testimonial */
+        .editorial { padding: 8rem 5%; text-align: center; max-width: 900px; margin: 0 auto; background: var(--bg-color); border-radius: var(--radius-lg); margin-bottom: 4rem; }
+        .editorial blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--brand-dark);
+            line-height: 1.4;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+        }
+
+        .editorial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .editorial-author img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+        .editorial-author div { text-align: left; }
+        .editorial-author h5 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; }
+        .editorial-author span { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* Minimal Footer */
+        footer {
+            background: var(--surface-color);
+            padding: 5rem 5% 2rem;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p { color: var(--text-muted); margin-top: 1rem; max-width: 300px; }
+        
+        .footer-links h5 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: var(--text-muted); transition: var(--transition); }
+        .footer-links a:hover { color: var(--brand-primary); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 3rem; padding-top: 8rem; }
+            .hero-content p { margin-inline: auto; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-large { grid-column: auto; }
+            .story-container { flex-direction: column; }
+            .hero-floating-card { left: 20px; bottom: -20px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links, .header-actions { display: none; }
+            .stat-grid { gap: 2rem; flex-direction: column; }
+            .india-connect-bg { font-size: 6rem; }
+            .map-container { display: none; } /* Hide complex map anim on small screens */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="ph-fill ph-leaf"></i> KrushiLink
+        </div>
+        <nav class="nav-links">
+            <a href="#global-reach">Global Reach</a>
+            <a href="#platform">The Platform</a>
+            <a href="#process">Supply Chain</a>
+        </nav>
+        <div class="header-actions">
+            <a href="/" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">FPO Login</a>
+            <a href="/" class="btn btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Dashboard</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow"><i class="ph-fill ph-sparkle"></i> Elevating Indian Agriculture</div>
+            <h1>Direct from Indian farms.<br><i>Delivered globally.</i></h1>
+            <p>The premium bridge between Bharat and the world. We connect Indian Farmer Producer Organizations (FPOs) directly with elite global buyers through a trustless, transparent ecosystem.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#platform" class="btn btn-primary">Empower Your FPO <i class="ph ph-arrow-right"></i></a>
+                <a href="/" class="btn btn-outline">Explore Deal Desk</a>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&q=80&w=800" alt="Indian agriculture fields" class="hero-image-main">
+            
+            <div class="hero-floating-card">
+                <div class="floating-icon"><i class="ph-bold ph-airplane-tilt"></i></div>
+                <div class="floating-text">
+                    <h4>Export Consignment Cleared</h4>
+                    <p style="margin-top: 5px;"><span class="badge-mh">ORG: Nashik, MH</span><span class="badge-eu">DST: Rotterdam</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners">
+        <p>Integrating India's agriculture with global standards</p>
+        <div class="partners-logos">
+            <div class="partner-item">
+                <i class="ph-fill ph-plant"></i>
+                <span>APEDA Compliant</span>
+            </div>
+            <div class="partner-item">
+                <i class="ph-fill ph-scales"></i>
+                <span>e-NAM Synced</span>
+            </div>
+            <div class="partner-item">
+                <i class="ph-fill ph-globe-hemisphere-east"></i>
+                <span>Global G.A.P Ready</span>
+            </div>
+            <div class="partner-item">
+                <i class="ph-fill ph-ship"></i>
+                <span>JNPT Verified</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDIA CONNECTING UI SECTION -->
+    <section class="india-connect" id="global-reach">
+        <div class="india-connect-bg">BHARAT</div>
+        <div class="ic-content">
+            <div class="eyebrow" style="justify-content: center; -webkit-text-fill-color: var(--brand-primary); background: transparent;">Roots in India. Reach Global.</div>
+            <h2 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem;">Connecting India's rural heartland to 40+ international markets.</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 3rem;">From the grape vineyards of Maharashtra to the spice gardens of Kerala, KrushiLink brings the world's premium buyers directly to the Indian farmer's doorstep.</p>
+            
+            <div class="map-container">
+                <div class="node">
+                    <div class="node-icon"><i class="ph-fill ph-map-pin"></i></div>
+                    <h4 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--brand-dark);">Indian FPOs</h4>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Nashik, MH</span>
+                </div>
+                
+                <div class="connection-line"></div>
+                
+                <div class="node">
+                    <div class="node-icon" style="background: var(--surface-color); color: var(--brand-primary); border: 2px solid var(--border-soft);"><i class="ph-fill ph-globe-stand"></i></div>
+                    <h4 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--brand-dark);">Global Markets</h4>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">European Union</span>
+                </div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <h3>12k+</h3>
+                    <p>Farmers Onboarded</p>
+                </div>
+                <div class="stat-item">
+                    <h3>₹34Cr</h3>
+                    <p>FPO Revenue Generated</p>
+                </div>
+                <div class="stat-item">
+                    <h3>14</h3>
+                    <p>Global Destinations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="platform" class="bento-section">
+        <div class="section-header">
+            <div class="eyebrow" style="justify-content: center; -webkit-text-fill-color: var(--brand-primary); background: transparent;">Platform Architecture</div>
+            <h2>Institutional-grade tooling for cooperative enterprises.</h2>
+        </div>
+        
+        <div class="bento-grid">
+            <div class="bento-card bento-large">
+                <h3>End-to-End Traceability</h3>
+                <p>Immutable origin proof mapping seed-to-shelf journeys. Built specifically to satisfy stringent EU and US import regulations automatically from Indian farms.</p>
+                <i class="ph-duotone ph-qr-code bento-graphic" style="font-size: 200px; color: var(--accent-gold);"></i>
+            </div>
+            <div class="bento-card">
+                <i class="ph-duotone ph-chart-line-up"></i>
+                <h3>Mandi Parity Pricing</h3>
+                <p>We aggregate live API feeds from local Mandis and international terminals to forecast and guarantee maximum margins.</p>
+            </div>
+            <div class="bento-card">
+                <i class="ph-duotone ph-shield-check"></i>
+                <h3>Instant APEDA Compliance</h3>
+                <p>Generate phytosanitary documents and commercial export invoices instantly upon QC verification.</p>
+            </div>
+            <div class="bento-card" style="grid-column: span 2;">
+                <i class="ph-duotone ph-thermometer-cold"></i>
+                <h3>Cold Chain Integrity Monitoring</h3>
+                <p>IoT-enabled temperature sensors alert you during the journey to JNPT port, ensuring zero spoilage and preserving your reputation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="story-section">
+        <div class="story-container">
+            <div class="story-visual">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=800" alt="Supermarket fresh produce exported">
+                <div class="hero-floating-card" style="top: 40px; bottom: auto; left: auto; right: -40px;">
+                    <div class="floating-icon" style="background: var(--surface-color);"><i class="ph-duotone ph-truck"></i></div>
+                    <div class="floating-text">
+                        <h4>JNPT Port Transit</h4>
+                        <p>Temp: 4.2°C (Optimal)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-content">
+                <div class="eyebrow" style="-webkit-text-fill-color: var(--brand-primary); background: transparent;">The Pipeline</div>
+                <h2 style="margin-bottom: 3rem; font-size: 2.2rem;">From Indian soil to global shelves.</h2>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <h4>Digitize the Harvest</h4>
+                        <p>Indian FPOs easily log batch data, volume, and quality metrics directly from the field into the KrushiLink ledger.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        <h4>Export Certification</h4>
+                        <p>Independent agronomists verify grading, attaching APEDA and Global G.A.P certificates natively to the lot.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        <h4>Competitive Deal Desk</h4>
+                        <p>Verified international buyers review lots within our Deal Desk and submit legally-binding USD/EUR bids.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-text">
+                        <h4>Monitored Export</h4>
+                        <p>Cold-chain telematics track the shipment to the port while smart-contracts handle escrow release securely.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="padding: 0 5%;">
+        <section id="impact" class="editorial">
+            <div class="eyebrow" style="justify-content: center; margin-bottom: 2rem; -webkit-text-fill-color: var(--brand-primary); background: transparent;">Voices of India's Farmers</div>
+            <blockquote>
+                "By circumventing local fragmented intermediaries, our cooperative directly secured premium EU export contracts for our Nashik grapes, boosting net farmer income by nearly 40% in a single season."
+            </blockquote>
+            <div class="editorial-author">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Rajesh D.">
+                <div>
+                    <h5>Rajesh Deshmukh</h5>
+                    <span>Director, Sahyadri Agro FPO (Maharashtra)</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo"><i class="ph-bold ph-leaf"></i> KrushiLink</div>
+                <p>The premium operating system connecting rural Indian cooperatives to the global marketplace.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h5>Platform</h5>
+                <ul>
+                    <li><a href="/">Deal Desk</a></li>
+                    <li><a href="/members">FPO Network</a></li>
+                    <li><a href="/documents">Compliance Suite</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <span>&copy; 2026 KrushiLink Systems. Building for Bharat. All rights reserved.</span>
+            <span>Made with <i class="ph-fill ph-heart" style="color: var(--accent-gold);"></i> in Pune, India.</span>
+        </div>
+    </footer>
+
+</body>
+</html>

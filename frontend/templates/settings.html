@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - AgroVault FPO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="/static/krushilink.css" />
+    <style>
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 32px;
+        }
+        .settings-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .settings-nav-item {
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 12px 16px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .settings-nav-item:hover {
+            background: var(--surface);
+            color: var(--text-1);
+        }
+        .settings-nav-item.active {
+            background: var(--green-50);
+            color: var(--green-700);
+            font-weight: 600;
+        }
+        body.dark-mode .settings-nav-item.active {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--green-400);
+        }
+        
+        .settings-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+        .settings-panel h2 {
+            margin: 0 0 24px 0;
+            font-family: 'Mukta', sans-serif;
+            font-size: 20px;
+            color: var(--text-1);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-2);
+            margin-bottom: 8px;
+        }
+        .form-control {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            color: var(--text-1);
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 14px;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        
+        .btn-primary {
+            background: var(--green-600);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover {
+            background: var(--green-700);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--border);
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--green-500);
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+        .setting-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 15px;
+            color: var(--text-1);
+        }
+        .setting-info p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-3);
+        }
+    </style>
+</head>
+<body>
+    <main class="page active">
+        <section class="screens-grid-wide">
+            <div class="dashboard-shell">
+                <aside class="dash-sidebar">
+                    <div class="logo" style="margin-bottom: 20px; font-family: 'Mukta', sans-serif; font-weight: 800; font-size: 22px; color: #fff; letter-spacing: -0.3px;">Krushi<span style="color: var(--amber-400);">Link</span></div>
+                    <div class="dash-sidebar-title">FPO Dashboard</div>
+                    <nav class="dash-nav">
+                        <button class="dash-nav-item" onclick="window.location.href='/'"><i class="ph ph-squares-four"></i> Overview</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/lots'"><i class="ph ph-package"></i> Lots</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/members'"><i class="ph ph-users"></i> Members</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/negotiations'"><i class="ph ph-handshake"></i> Negotiations</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/documents'"><i class="ph ph-file-text"></i> Documents</button>
+                        <button class="dash-nav-item active" onclick="window.location.href='/settings'"><i class="ph ph-gear"></i> Settings</button>
+                    </nav>
+                </aside>
+                
+                <section class="main-content">
+                    <section class="section-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+                        <div>
+                            <h1 class="section-title">Settings</h1>
+                            <p class="section-sub">Manage your platform preferences and FPO profile.</p>
+                        </div>
+                        <button id="themeToggleBtn" style="background: var(--surface); color: var(--text-2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; font-family: 'Noto Sans', sans-serif; transition: all 0.2s;">
+                            <i class="ph ph-moon" id="themeIcon"></i> <span id="themeText">Dark</span>
+                        </button>
+                    </section>
+
+                    <div class="settings-grid">
+                        <aside class="settings-nav">
+                            <button class="settings-nav-item active"><i class="ph ph-user"></i> My Profile</button>
+                            <button class="settings-nav-item"><i class="ph ph-buildings"></i> FPO Details</button>
+                            <button class="settings-nav-item"><i class="ph ph-bell"></i> Notifications</button>
+                            <button class="settings-nav-item"><i class="ph ph-shield-check"></i> Security</button>
+                        </aside>
+
+                        <div class="settings-panel">
+                            <h2>Profile Settings</h2>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" value="Sahkari Admin" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" value="admin@agrovault.in" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" value="+91 9876543210" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Language Preference</label>
+                                <select class="form-control">
+                                    <option value="en">English</option>
+                                    <option value="mr">Marathi (मराठी)</option>
+                                    <option value="hi">Hindi (हिंदी)</option>
+                                </select>
+                            </div>
+
+                            <h2 style="margin-top: 40px;">Preferences</h2>
+                            
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive daily summaries of bid activity.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <h4>SMS Alerts</h4>
+                                    <p>Get instant SMS for new buyer offers.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div style="margin-top: 32px;">
+                                <button class="btn-primary">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+            const navItems = document.querySelectorAll(".dash-nav-item");
+            navItems.forEach(item => {
+                if(item.textContent.includes("Overview")) item.onclick = () => window.location.href="/";
+                if(item.textContent.includes("Lots")) item.onclick = () => window.location.href="/lots";
+                if(item.textContent.includes("Members")) item.onclick = () => window.location.href="/members";
+                if(item.textContent.includes("Negotiations")) item.onclick = () => window.location.href="/negotiations";
+                if(item.textContent.includes("Documents")) item.onclick = () => window.location.href="/documents";
+                if(item.textContent.includes("Settings")) item.onclick = () => window.location.href="/settings";
+            });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dark Mode Setup
+            const body = document.body;
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+                updateThemeUI(true);
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isDark = body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeUI(isDark);
+            });
+
+            function updateThemeUI(isDark) {
+                if(isDark) {
+                    themeIcon.classList.replace('ph-moon', 'ph-sun');
+                    themeText.textContent = 'Light';
+                } else {
+                    themeIcon.classList.replace('ph-sun', 'ph-moon');
+                    themeText.textContent = 'Dark';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

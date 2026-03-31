@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Members - AgroVault FPO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="/static/krushilink.css" />
+    <style>
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .member-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .member-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            border-color: var(--green-400);
+        }
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--green-100);
+            color: var(--green-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .member-info h3 {
+            margin: 0;
+            font-family: 'Mukta', sans-serif;
+            font-size: 18px;
+            color: var(--text-1);
+        }
+        .member-info p {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: var(--text-3);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .member-stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-top: 4px;
+        }
+        .crops-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+        .crop-tag {
+            background: var(--green-50);
+            color: var(--green-800);
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .actions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .search-input {
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 300px;
+            background: var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23999" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>') no-repeat 12px center;
+            color: var(--text-1);
+        }
+        .btn-primary {
+            background: var(--green-600);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        body.dark-mode .crop-tag {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--green-400);
+        }
+    </style>
+</head>
+<body>
+    <main class="page active">
+        <section class="screens-grid-wide">
+            <div class="dashboard-shell">
+                <aside class="dash-sidebar">
+                    <div class="logo" style="margin-bottom: 20px; font-family: 'Mukta', sans-serif; font-weight: 800; font-size: 22px; color: #fff; letter-spacing: -0.3px;">Krushi<span style="color: var(--amber-400);">Link</span></div>
+                    <div class="dash-sidebar-title">FPO Dashboard</div>
+                    <nav class="dash-nav">
+                        <button class="dash-nav-item" onclick="window.location.href='/'"><i class="ph ph-squares-four"></i> Overview</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/lots'"><i class="ph ph-package"></i> Lots</button>
+                        <button class="dash-nav-item active" onclick="window.location.href='/members'"><i class="ph ph-users"></i> Members</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/negotiations'"><i class="ph ph-handshake"></i> Negotiations</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/documents'"><i class="ph ph-file-text"></i> Documents</button>
+                        <button class="dash-nav-item" onclick="window.location.href='/settings'"><i class="ph ph-gear"></i> Settings</button>
+                    </nav>
+                </aside>
+                
+                <section class="main-content">
+                    <section class="section-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                        <div>
+                            <h1 class="section-title">Farmer Network</h1>
+                            <p class="section-sub">Manage your FPO's registered farmers and land data.</p>
+                        </div>
+                        <button id="themeToggleBtn" style="background: var(--surface); color: var(--text-2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; font-family: 'Noto Sans', sans-serif; transition: all 0.2s;">
+                            <i class="ph ph-moon" id="themeIcon"></i> <span id="themeText">Dark</span>
+                        </button>
+                    </section>
+
+                    <div class="actions-header">
+                        <input type="text" class="search-input" placeholder="Search farmers by name, village..." />
+                        <button class="btn-primary"><i class="ph ph-plus"></i> Add Farmer</button>
+                    </div>
+
+                    <div class="members-grid">
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="avatar">R</div>
+                                <div class="member-info">
+                                    <h3>Ramesh Patil</h3>
+                                    <p><i class="ph ph-map-pin"></i> Niphad, Nashik</p>
+                                </div>
+                            </div>
+                            <div class="crops-tags">
+                                <span class="crop-tag">Onion</span>
+                                <span class="crop-tag">Tomato</span>
+                            </div>
+                            <div class="member-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">Land Size</div>
+                                    <div class="stat-value">4.5 Acres</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Active Lots</div>
+                                    <div class="stat-value">2</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Joined</div>
+                                    <div class="stat-value">2023</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="avatar">S</div>
+                                <div class="member-info">
+                                    <h3>Suresh Jadhav</h3>
+                                    <p><i class="ph ph-map-pin"></i> Baramati, Latur</p>
+                                </div>
+                            </div>
+                            <div class="crops-tags">
+                                <span class="crop-tag">Soybean</span>
+                                <span class="crop-tag">Sugarcane</span>
+                            </div>
+                            <div class="member-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">Land Size</div>
+                                    <div class="stat-value">8.0 Acres</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Active Lots</div>
+                                    <div class="stat-value">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Joined</div>
+                                    <div class="stat-value">2022</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="avatar">V</div>
+                                <div class="member-info">
+                                    <h3>Vijay Pawar</h3>
+                                    <p><i class="ph ph-map-pin"></i> Ratnagiri</p>
+                                </div>
+                            </div>
+                            <div class="crops-tags">
+                                <span class="crop-tag">Mango (Alphonso)</span>
+                            </div>
+                            <div class="member-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">Land Size</div>
+                                    <div class="stat-value">12.0 Acres</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Active Lots</div>
+                                    <div class="stat-value">5</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Joined</div>
+                                    <div class="stat-value">2021</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="avatar">A</div>
+                                <div class="member-info">
+                                    <h3>Anand Deshmukh</h3>
+                                    <p><i class="ph ph-map-pin"></i> Sangola, Solapur</p>
+                                </div>
+                            </div>
+                            <div class="crops-tags">
+                                <span class="crop-tag">Pomegranate</span>
+                                <span class="crop-tag">Grape</span>
+                            </div>
+                            <div class="member-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">Land Size</div>
+                                    <div class="stat-value">6.2 Acres</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Active Lots</div>
+                                    <div class="stat-value">1</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Joined</div>
+                                    <div class="stat-value">2024</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+            const navItems = document.querySelectorAll(".dash-nav-item");
+            navItems.forEach(item => {
+                if(item.textContent.includes("Overview")) item.onclick = () => window.location.href="/";
+                if(item.textContent.includes("Lots")) item.onclick = () => window.location.href="/lots";
+                if(item.textContent.includes("Members")) item.onclick = () => window.location.href="/members";
+                if(item.textContent.includes("Negotiations")) item.onclick = () => window.location.href="/negotiations";
+                if(item.textContent.includes("Documents")) item.onclick = () => window.location.href="/documents";
+                if(item.textContent.includes("Settings")) item.onclick = () => window.location.href="/settings";
+            });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dark Mode Setup
+            const body = document.body;
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+                updateThemeUI(true);
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isDark = body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeUI(isDark);
+            });
+
+            function updateThemeUI(isDark) {
+                if(isDark) {
+                    themeIcon.classList.replace('ph-moon', 'ph-sun');
+                    themeText.textContent = 'Light';
+                } else {
+                    themeIcon.classList.replace('ph-sun', 'ph-moon');
+                    themeText.textContent = 'Dark';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
