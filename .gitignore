@@ -39,3 +39,7 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# local helper artifacts
+expo_go_qr_precise.png
+generate_qr.js
